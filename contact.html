@@ -97,6 +97,9 @@
 </form>
 
 <script>
+
+  // Use the event handler to respond to form submission
+  // Use DOM API to visually indicate errors
 document.getElementById("myForm").addEventListener("submit", function(event) {
   var studentName = document.getElementById("studentName").value.trim();
   var message = document.getElementById("message").value.trim();
@@ -104,22 +107,24 @@ document.getElementById("myForm").addEventListener("submit", function(event) {
   var messageError = document.getElementById("messageError");
   var isValid = true;
 
-  // Reset errors
+  // Empty out the DOM alerting variables for student name and message validation errors or success
   studentNameError.textContent = "";
   messageError.textContent = "";
 
-  // Validate student name
+  // Validate form controls and prevent form submission on invalid data
+  // Check for name being an empty field 
   if (studentName === "") {
     studentNameError.textContent = "Error: Please type your student name";
     isValid = false;
   }
 
-  // Validate message
+  // Check for message contining lower case please
   if (!message.includes("please")) {
     messageError.textContent = "Error: Kindly type in 'please' in lower case in your message";
     isValid = false;
   }
 
+// Boolean variable is 1 if form checks were good and 0 if form checks were bad
   if (!isValid) {
     event.preventDefault(); // Prevent form submission if there are errors
   }
