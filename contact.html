@@ -14,7 +14,29 @@
     	    padding: 0;
    	    font-family: Arial, sans-serif;
    	    background-color: #aee4e2;
-	    margin-top: 50px;
+   	    margin-bottom: 100px;
+}
+	.error {
+	color: rgb(255, 0, 0);
+	font-weight: bold;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picnic">
+    <style>
+        body {
+            display: flex;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+    	    padding: 0;
+   	    font-family: Arial, sans-serif;
+   	    background-color: #aee4e2;
    	    margin-bottom: 100px;
 }
 
@@ -22,6 +44,7 @@
     background-color: #fff;
     padding: 50px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin-top: 400px;
 }
     </style>
     <title>NASA 201 Outline</title>
@@ -30,9 +53,8 @@
 <div style="overflow: hidden;height: 250px;">
 
 <nav class="demo">
-    <img class="logo" src="https://www.vmcdn.ca/f/files/shared/corporate-logos/saultcollege_1500x600_colour.jpg" />
-    <span>NASA 201 Lab 1</span>
-  </a>
+    <a href="./index.html" class="pseudo button icon-picture"><img class="logo" src="https://www.vmcdn.ca/f/files/shared/corporate-logos/saultcollege_1500x600_colour.jpg" /></a>
+    <a href="./index.html" class="pseudo button icon-picture"><span>NASA 201 Lab 2</span></a>
 
   <!--Prof Rodney, I am using the CSS Nav framework, Ami (Ahmad Touseef)-->
   <input id="bmenub" type="checkbox" class="show">
@@ -49,7 +71,9 @@
     <p>Labs are hard: please contact Professor Rodney early.  Please do not procrastinate and stress, last minute!</p>
         <img src="https://img.freepik.com/premium-vector/cute-girl-send-mail-cartoon_96373-46.jpg" alt="Email Cartoon" width="300" height="auto">
         <h1>Questions for Professor Rodney Martin</h1>   
-	 <form method="post" action="mailto:rodney.martin@saultcollege.ca?subject=NASA 201 Student Questions">
+
+
+<form id="myForm" method="post" action="mailto:rodney.martin@saultcollege.ca?subject=NASA 201 Student Questions">
 <label for="questionsforProfRodney">Select Your Question</label>
           <select id="NASA201studentquestions" name="NASA201studentquestions">
             <option value="I am struggling to write code?">I am struggling to write code?</option>
@@ -58,8 +82,50 @@
             <option value="I am struggling to make my website live">I am struggling to make my website live</option>
           </select>
         </label>
-	<button type="submit">Submit your question to Prof Rodney</button>  
-      </form>
+  <label for="studentName">What is your Name?</label><br>
+ 
+<input type="text" id="studentName" name="studentName"><br>
+
+  <span id="studentNameError" class="error"></span><br>
+  
+  <label for="message">What is your message for Professor Rodney?</label><br>
+  <textarea id="message" name="message"></textarea><br>
+
+  <span id="messageError" class="error"></span><br>
+  
+  <input type="submit" value="Submit">
+</form>
+
+<script>
+document.getElementById("myForm").addEventListener("submit", function(event) {
+  var studentName = document.getElementById("studentName").value.trim();
+  var message = document.getElementById("message").value.trim();
+  var studentNameError = document.getElementById("studentNameError");
+  var messageError = document.getElementById("messageError");
+  var isValid = true;
+
+  // Reset errors
+  studentNameError.textContent = "";
+  messageError.textContent = "";
+
+  // Validate student name
+  if (studentName === "") {
+    studentNameError.textContent = "Error: Please type your student name";
+    isValid = false;
+  }
+
+  // Validate message
+  if (!message.includes("please")) {
+    messageError.textContent = "Error: Kindly type in 'please' in lower case in your message";
+    isValid = false;
+  }
+
+  if (!isValid) {
+    event.preventDefault(); // Prevent form submission if there are errors
+  }
+});
+</script>
+
 <p>Professor Rodney martin responds to emails in the following priorities:</p>
 <p><strong>Priority Table shown below:</strong></p>
     <h2>Email Response Priority Times</h2>
@@ -93,7 +159,7 @@
             <li>Show your progress to Professor Rodney after class and get feedback</li>
         </ul>
     <footer>
-        <p>&copy 2024 &nbsp;&nbsp;&nbsp; NASA 201 Lab 1 &nbsp;&nbsp;&nbsp; Ahmad Touseef (Ami) &nbsp;&nbsp;&nbsp; All rights reserved</p>
+        <p>&copy 2024 &nbsp;&nbsp;&nbsp; NASA 201 Lab 2 &nbsp;&nbsp;&nbsp; Ahmad Touseef (Ami) &nbsp;&nbsp;&nbsp; All rights reserved</p>
     </footer>
 </div>
 </body>
