@@ -1,0 +1,51 @@
+QUESTION
+Explain why it is not safe for a server receiving form data to trust the data, even if JavaScript was used to validate the data?
+
+ANSWER
+Equifax, one of the world's largest credit reporting agencies, houses legally everyone's personally identifiable information, such as full name, birthdate, home address, social security number, driver's license number, phone number, email address, financial information like credit card and bank account information.
+
+Similarly, any other business, like Sault College, Sault Area Hospital, Group Health, Municipalities, E-Commerce web apps of a small business or a large corporate, and any other companies that house customer PII, is legally bound to protect PII data through the legislation of Canada Privacy Act.
+
+Violation of the Canada Privacy Act occurred in 2017: Cyber crime caused theft of over 147 million people's personally identifiable information at Equifax from cyber criminals' use of digital weapons to break into Equifax's website webapp and use the breach to perform the theft and consequent extortion and harm to victims of the theft.
+
+Most-portem dissections and forensics of the breach showed that the crime involved multiple digital weapons, among which one of the cyber crime digital weapons used vulnerably at Equifax: "incomplete server-side full validation of inputted data".
+
+The framework that was used to build Equifax website webapp was Apache Struts, and rigorous security quality assurance, testing, verification and validation requirements of server-side data validation was not ordered to be completed by the C-Suite Execs at Equifax, leaving their own IT team under resourced.
+
+This resulted in decisions at Equifax manage to deprive their IT of resources: causing the incomplete server-side validation issue to persist and continue their over reliance on client-side validation.
+
+Criminals scanned Equifax for vulnerabilities and they match-made the right digital weapon to the vulnerability: Equifax's high dependence on client-side data validation and lack of a full server-side validation.
+
+This permitted the criminals to use a digital weapon family that uses XSS Cross-Site Scripting to submit malicious code and the criminals successfully fooled the web server to accept the malicious code that bypassed client side validation and server side validation, and resulted in following interception of all consequent client login credential data inputs to Equifax, which hackers then used to authenticate and successfully "unlock" the server database with the stolen "keys" and made the criminals access/steal 147 million people's PII data.
+
+The resulting consequences have caused lawsuits against Equifax, extortion payment demands by the cyber criminals, a wide outcry from the public victims, and huge PR image loss for Equifax.
+
+Following the Equifax 2017 event, this caused advisories for owners and operators of any website webapp to go through website and webapp security vulnerability scanning accompanied with post-scan gap assessment and gap addressing.
+
+Some of the "treatments" to the over dependence on client-side verification and lack of full server-side validation gaps, include:
+
+(1) Compliance to CIS Controls Security Benchmarks for the web server to be hardened in case it is breached, by following the hardening QA to do list, outlined here, https://www.cisecurity.org/cis-benchmarks
+
+(2) Using tools like Burp Suite, Nessus to scan the full stack of systems used in web app, including the client-side code, server-side code, web server itself, the operations system itself and the underlying network to validate and verify that the server-side data checking actually works against all types of XSS Cross Site Scripting attacks that try to by-pass client-side data checking and will cause big harm if server side fails to validate the data input.  Links to the scanning tools are here: https://portswigger.net/burp/pro/trial and https://www.tenable.com/products/nessus/nessus-professional/evaluate
+
+(3) Use case based qa testing to check if in digital non-destructive testing processes, the server can be fooled with 
+
+    a. QA staff 1 submits sensitive information, such as credit card details, through a form on the being-qa-tested website.
+    b. QA staff 2 intercepts the data transmission between the client and the server using techniques like man-in-the-middle attacks.
+    c. QA staff 2 modifies the form data, such as altering the credit card number or expiration date, before forwarding it to the server.
+    d. The server (if it solely relies on client-side validation) accepts the tampered data, leading to potential financial fraud or data breaches.
+
+OR
+
+    a. QA staff 1 submit comments or messages through a form field on the being-qa-tested website.
+    b. QA staff 2 injects malicious JavaScript code into the form field
+    c. QA staff 1 views the comments or messages containing the injected JavaScript, and during this time, QA staff 1's computer's browser execute the malicious code.
+    d. QA staff 1's session cookies are stolen by QA staff 2 OR QA staff 1 is redirected to a fake clone of the real website and fools QA staff 1 to interact with the fake website with real logos and "real feel despite being fake" and makes QA staff 1 perform unauthorized actions, such as submitting PII data to further harvest "keys" that will permit QA staff 2 unlock the vault containing QA staff 1's information in the website's database.
+
+OR
+
+Follow the accepted security QA Testing, Verification, Validation Standard Operating Procedures decided by the security team to ensure the website's owner get a full report on identified vulnerabilities and propose next steps in more engagements in the consulting to address the gaps identified in the gap assessment report.
+
+This is why server-side data validation is not only a nice thing, it is a necessity, like clean drinking water!
+
+This is why solely depending on client-side data validation is insufficient and will cause security breach.
